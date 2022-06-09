@@ -1,0 +1,44 @@
+# 4 change
+[property]
+gpu-id=0
+net-scale-factor=0.0039215697906911373
+tlt-model-key=tlt_encode
+tlt-encoded-model=Models/PeopleNet/resnet34_peoplenet_pruned.etlt #change
+labelfile-path=Models/PeopleNet/labels.txt #change
+input-dims=3;544;960;0
+uff-input-blob-name=input_1
+batch-size=1
+process-mode=1
+model-color-format=0
+## 0=FP32, 1=INT8, 2=FP16 mode
+network-mode=2 #change
+num-detected-classes=3 #change
+cluster-mode=2
+interval=0
+gie-unique-id=1
+output-blob-names=output_bbox/BiasAdd;output_cov/Sigmoid
+
+#Use the config params below for dbscan clustering mode
+#[class-attrs-all]
+#detected-min-w=4
+#detected-min-h=4
+#minBoxes=3
+#eps=0.7
+
+#Use the config params below for NMS clustering mode
+[class-attrs-all]
+topk=20
+nms-iou-threshold=0.5
+pre-cluster-threshold=0.4
+
+## Per class configurations
+#[class-attrs-0]
+#topk=20
+#nms-iou-threshold=0.5
+#pre-cluster-threshold=0.4
+
+[class-attrs-1]
+#disable bag detection
+pre-cluster-threshold=1.0
+#eps=0.7
+#dbscan-min-score=0.5
